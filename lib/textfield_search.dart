@@ -253,7 +253,7 @@ class _TextFieldSearchState extends State<TextFieldSearch> {
                 // if we have a label property, and getSelectedValue function
                 // send getSelectedValue to parent widget using the label property
                 if (widget.getSelectedValue != null) {
-                  widget.controller.text = filteredList![i].label;
+                  // widget.controller.text = filteredList![i].label;
                   widget.getSelectedValue!(filteredList![i]);
                 } else {
                   widget.controller.text = filteredList![i];
