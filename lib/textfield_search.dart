@@ -32,6 +32,21 @@ class TextFieldSearch extends StatefulWidget {
   /// The number of matched items that are viewable in results
   final int itemsInView;
 
+  /// An optional method that validates an input. Returns an error string to
+  /// display if the input is invalid, or null otherwise.
+  ///
+  /// The returned value is exposed by the [FormFieldState.errorText] property.
+  /// The [TextFormField] uses this to override the [InputDecoration.errorText]
+  /// value.
+  ///
+  /// Alternating between error and normal state can cause the height of the
+  /// [TextFormField] to change if no other subtext decoration is set on the
+  /// field. To create a field whose height is fixed regardless of whether or
+  /// not an error is displayed, either wrap the  [TextFormField] in a fixed
+  /// height parent like [SizedBox], or set the [InputDecoration.helperText]
+  /// parameter to a space.
+  final String? Function(String?)? validator;
+
   /// Creates a TextFieldSearch for displaying selected elements and retrieving a selected element
   const TextFieldSearch(
       {Key? key,
@@ -44,7 +59,8 @@ class TextFieldSearch extends StatefulWidget {
       this.decoration,
       this.scrollbarDecoration,
       this.itemsInView = 3,
-      this.minStringLength = 2})
+      this.minStringLength = 2,
+        this.validator})
       : super(key: key);
 
   @override
@@ -359,7 +375,8 @@ class _TextFieldSearchState extends State<TextFieldSearch> {
   Widget build(BuildContext context) {
     return CompositedTransformTarget(
       link: this._layerLink,
-      child: TextField(
+      child: TextFormField(
+        validator: widget.validator,
         controller: widget.controller,
         focusNode: this._focusNode,
         decoration: widget.decoration != null
