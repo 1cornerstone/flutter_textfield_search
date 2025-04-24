@@ -109,24 +109,25 @@ class _TextFieldSearchState extends State<TextFieldSearch> {
         // loop through each item in filtered items
         for (int i = 0; i < filteredList!.length; i++) {
           // lowercase the item and see if the item contains the string of text from the lowercase search
-          if (widget.getSelectedValue != null) {
-            if (this
-                .filteredList![i]
-                .label
-                .toLowerCase()
-                .contains(widget.controller.text.toLowerCase())) {
+          // if (widget.getSelectedValue != null) {
+          //   if (this
+          //       .filteredList![i]
+          //       .label
+          //       .toLowerCase()
+          //       .contains(widget.controller.text.toLowerCase())) {
+          //     // if there is a match, add to the temp list
+          //     tempList.add(this.filteredList![i]);
+          //   }
+          // } else {
+          //   if (this
+          //       .filteredList![i]
+          //       .toLowerCase()
+          //       .contains(widget.controller.text.toLowerCase())) {
+
               // if there is a match, add to the temp list
               tempList.add(this.filteredList![i]);
-            }
-          } else {
-            if (this
-                .filteredList![i]
-                .toLowerCase()
-                .contains(widget.controller.text.toLowerCase())) {
-              // if there is a match, add to the temp list
-              tempList.add(this.filteredList![i]);
-            }
-          }
+          //   }
+          // }
         }
         // helper function to set tempList and other state props
         this.resetState(tempList);
@@ -180,7 +181,7 @@ class _TextFieldSearchState extends State<TextFieldSearch> {
     _focusNode.addListener(() {
       if (_focusNode.hasFocus) {
         this._overlayEntry = this._createOverlayEntry();
-        Overlay.of(context)!.insert(this._overlayEntry);
+        Overlay.of(context).insert(this._overlayEntry);
       } else {
         this._overlayEntry.remove();
         // check to see if itemsFound is false, if it is clear the input
